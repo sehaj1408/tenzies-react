@@ -5,7 +5,7 @@ export default function Die(props) {;
     return (
         <div 
         className="dice" 
-        style={{backgroundColor: props.isClicked ? "#59E391" : "white"}}
+        style={{backgroundColor: props.isClicked ? "#867ebd" : "white"}}
         >
             <button 
             onClick={() => props.handleDiceClick(props.id)}
