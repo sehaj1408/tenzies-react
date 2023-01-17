@@ -19,6 +19,7 @@ export default function App() {
         } 
         return numbersArray;   
     } 
+    console.log(dice);
    
     const diceElements = dice.map(die => {
         return <Die 
@@ -31,7 +32,23 @@ export default function App() {
     })
 
     function handleDiceClick(id) {
-        console.log(id);
+        const diceArray = [];
+
+        dice.map(dieObject => {
+            if (dieObject.id === id) {
+                diceArray.push({
+                    ...dieObject,
+                    isClicked: !dieObject.isClicked
+                })
+            }
+            else {
+                diceArray.push({
+                    ...dieObject
+                })
+            }
+        })
+
+        setDice(diceArray);
     }
 
     function handleRoll() {
