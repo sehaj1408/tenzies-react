@@ -2,7 +2,7 @@ import React from "react";
 import "./app.css";
 import Die from "../Die/Die";
 import { nanoid } from 'nanoid';
-
+import Confetti from 'react-confetti';
 
 export default function App() {
     const [dice, setDice] = React.useState(generateDiceNumbers());
@@ -20,9 +20,7 @@ export default function App() {
         })
         if (diceValues.length === 10) {
             const allEqual = arr => arr.every(v => v === arr[0])
-            if (allEqual(diceValues)) {
-                console.log("You won");
-            }
+            allEqual(diceValues) && setGameStatus(true);
         }
     }, [dice])
 
@@ -92,6 +90,7 @@ export default function App() {
     return (
         <main>
             <div className="content">
+                {gameStatus && <Confetti />}
                 <div className="title-container">
                     <h1>Tenzies</h1>
                     <h3>Roll until all dice are the same. 
@@ -100,7 +99,9 @@ export default function App() {
                 <div className="dice-container">
                     {diceElements}
                 </div>
-                <button className="roll-button" onClick={handleRoll}>Roll</button>
+                <button className="roll-button" onClick={handleRoll}>
+                    {gameStatus ? "New Game" : "Roll"}
+                </button>
             </div>
         </main>
     )
