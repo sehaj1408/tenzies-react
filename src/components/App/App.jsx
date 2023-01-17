@@ -52,7 +52,23 @@ export default function App() {
     }
 
     function handleRoll() {
-        setDice(generateDiceNumbers());
+        const allDice = [];
+
+        dice.map(die => {
+            if (die.isClicked) {
+                allDice.push(die)
+            }
+            else {
+                const newDie = {
+                    id: nanoid(),
+                    value: (Math.floor(Math.random() * 6) + 1),
+                    isClicked: false
+                }
+                allDice.push(newDie);
+            }
+        })
+
+        setDice(allDice);
     }
 
     return (
