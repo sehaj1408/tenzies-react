@@ -6,6 +6,25 @@ import { nanoid } from 'nanoid';
 
 export default function App() {
     const [dice, setDice] = React.useState(generateDiceNumbers());
+    const [gameStatus, setGameStatus] = React.useState(false);
+
+    React.useEffect(() => {
+        const diceValues = [];
+        dice.map(die => {
+            if (die.isClicked) {
+                diceValues.push(die.value)
+            }
+            else {
+                return;
+            }
+        })
+        if (diceValues.length === 10) {
+            const allEqual = arr => arr.every(v => v === arr[0])
+            if (allEqual(diceValues)) {
+                console.log("You won");
+            }
+        }
+    }, [dice])
 
     function generateDiceNumbers() {
         const numbersArray = [];
@@ -15,7 +34,6 @@ export default function App() {
         } 
         return numbersArray;   
     } 
-    console.log(dice);
    
     const diceElements = dice.map(die => {
         return <Die 
