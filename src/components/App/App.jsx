@@ -2,7 +2,7 @@ import React from "react";
 import "./app.css";
 import Die from "../Die/Die";
 import { nanoid } from 'nanoid';
-import Confetti from 'react-confetti';
+import ConfettiExplosion from 'react-confetti-explosion';
 
 export default function App() {
     const [dice, setDice] = React.useState(generateDiceNumbers());
@@ -72,25 +72,31 @@ export default function App() {
     }
 
     function handleRoll() {
-        const allDice = [];
+        if (gameStatus) {
+            setDice(generateDiceNumbers());
+            setGameStatus(false);
+        }
+        else {
+            const allDice = [];
 
-        dice.map(die => {
-            if (die.isClicked) {
-                allDice.push(die)
-            }
-            else {
-                const newDie = createNewDie();
-                allDice.push(newDie);
-            }
-        })
+            dice.map(die => {
+                if (die.isClicked) {
+                    allDice.push(die)
+                }
+                else {
+                    const newDie = createNewDie();
+                    allDice.push(newDie);
+                }
+            })
 
-        setDice(allDice);
+            setDice(allDice);
+        }
     }
 
     return (
         <main>
             <div className="content">
-                {gameStatus && <Confetti />}
+                {gameStatus && <ConfettiExplosion />}
                 <div className="title-container">
                     <h1>Tenzies</h1>
                     <h3>Roll until all dice are the same. 
