@@ -3,8 +3,13 @@ import "./die.css"
 
 export default function Die(props) {;
     return (
-        <div className="dice">
-            <button onClick={() => props.handleDieClick(props.value, props.dieKey)}>{props.value}</button>
+        <div 
+        className="dice" 
+        style={{backgroundColor: props.isClicked ? "#59E391" : "white"}}
+        >
+            <button 
+            onClick={() => props.handleDiceClick(props.id)}
+            >{props.value}</button>
         </div>
     )
 }

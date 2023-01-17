@@ -11,7 +11,7 @@ main {
 main:after {
     content: '';
     display: block;
-    padding-top: 90%;
+    padding-top: 100%;
 }
 
 .content {

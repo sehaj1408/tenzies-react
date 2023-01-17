@@ -1,6 +1,7 @@
 import React from "react";
-import "./app.css"
-import Die from "../Die/Die"
+import "./app.css";
+import Die from "../Die/Die";
+import { nanoid } from 'nanoid';
 
 
 export default function App() {
@@ -10,7 +11,7 @@ export default function App() {
         const numbersArray = [];
         for (let i = 0; i < 10; i++) {
             const die = {
-                key: i,
+                id: nanoid(),
                 value: (Math.floor(Math.random() * 6) + 1),
                 isClicked: false
             }
@@ -20,11 +21,17 @@ export default function App() {
     } 
    
     const diceElements = dice.map(die => {
-        return <Die dieKey={die.key} value={die.value} handleDieClick={handleDieClick}/>
+        return <Die 
+        handleDiceClick={handleDiceClick} 
+        key={die.id} 
+        id={die.id}
+        value={die.value} 
+        isClicked={die.isClicked}
+        />
     })
 
-    function handleDieClick(num, key) {
-        console.log(`clicked: ${num} and ${key}`)
+    function handleDiceClick(id) {
+        console.log(id);
     }
 
     function handleRoll() {
