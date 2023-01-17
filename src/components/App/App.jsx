@@ -10,11 +10,7 @@ export default function App() {
     function generateDiceNumbers() {
         const numbersArray = [];
         for (let i = 0; i < 10; i++) {
-            const die = {
-                id: nanoid(),
-                value: (Math.floor(Math.random() * 6) + 1),
-                isClicked: false
-            }
+            const die = createNewDie();
             numbersArray.push(die);
         } 
         return numbersArray;   
@@ -51,6 +47,14 @@ export default function App() {
         setDice(diceArray);
     }
 
+    function createNewDie() {
+        return {
+            id: nanoid(),
+            value: (Math.floor(Math.random() * 6) + 1),
+            isClicked: false
+        }
+    }
+
     function handleRoll() {
         const allDice = [];
 
@@ -59,11 +63,7 @@ export default function App() {
                 allDice.push(die)
             }
             else {
-                const newDie = {
-                    id: nanoid(),
-                    value: (Math.floor(Math.random() * 6) + 1),
-                    isClicked: false
-                }
+                const newDie = createNewDie();
                 allDice.push(newDie);
             }
         })
